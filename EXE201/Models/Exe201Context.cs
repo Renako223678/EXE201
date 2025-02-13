@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EXE201.Models;
 
-public partial class Exe201Context : DbContext
+public partial class EXE201Context : DbContext
 {
-    public Exe201Context()
+    public EXE201Context()
     {
     }
 
-    public Exe201Context(DbContextOptions<Exe201Context> options)
+    public EXE201Context(DbContextOptions<EXE201Context> options)
         : base(options)
     {
     }
