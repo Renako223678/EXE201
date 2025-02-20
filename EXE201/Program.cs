@@ -23,6 +23,12 @@ builder.Services.AddScoped<IPackageRepository, PackageRepository>();
 builder.Services.AddScoped<IPackageService, EXE201.Service.PackageService>();
 builder.Services.AddScoped<IPackageServiceRepository, PackageServiceRepository>();
 builder.Services.AddScoped<IPackageServiceService, PackageServiceService>();
+builder.Services.AddScoped<IItineraryRepository, ItineraryRepository>();  
+builder.Services.AddScoped<IItineraryService, ItineraryService>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
+builder.Services.AddScoped<IDiscountService, DiscountService>();
 builder.Services.AddDbContext<EXE201Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
