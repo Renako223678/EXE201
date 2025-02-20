@@ -1,4 +1,8 @@
 using EXE201.Models;
+using EXE201.Repository.Interface;
+using EXE201.Repository;
+using EXE201.Service.Interface;
+using EXE201.Service;
 using EXE201.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +15,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IDestinationRepository, DestinationRepository>();
+builder.Services.AddScoped<IDestinationService, DestinationService>();
+builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+builder.Services.AddScoped<IPackageService, EXE201.Service.PackageService>();
+builder.Services.AddScoped<IPackageServiceRepository, PackageServiceRepository>();
+builder.Services.AddScoped<IPackageServiceService, PackageServiceService>();
 builder.Services.AddDbContext<EXE201Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
