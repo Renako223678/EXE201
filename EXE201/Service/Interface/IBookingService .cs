@@ -1,6 +1,6 @@
-﻿namespace EXE201.Service.Interface
-{
-    public interface IBookingService
-    {
-    }
-}
+﻿//namespace EXE201.Service.Interface
+//{
+//    public interface IBookingService
+//    {
+//    }
+//}
