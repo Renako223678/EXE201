@@ -5,6 +5,7 @@ using EXE201.Service.Interface;
 using EXE201.Service;
 using EXE201.Services;
 using Microsoft.EntityFrameworkCore;
+using EXE201.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,11 @@ builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 builder.Services.AddScoped<IDiscountService, DiscountService>();
+builder.Services.AddScoped<IBookingDetailRepository, BookingDetailRepository>();
+builder.Services.AddScoped<IBookingDetailService, BookingDetailService>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
 builder.Services.AddDbContext<EXE201Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
