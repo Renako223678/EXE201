@@ -1,6 +1,8 @@
-﻿using EXE201.Models;
+﻿using EXE201.Controllers.DTO;
+using EXE201.Models;
 using EXE201.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace EXE201.Controllers
 {
@@ -31,26 +33,43 @@ namespace EXE201.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCart([FromBody] Cart cart)
+        public async Task<IActionResult> CreateCart([FromBody] CartDTO cartDto)
         {
+            if (cartDto == null) return BadRequest("Invalid request.");
+
+            var cart = new Cart
+            {
+                AccountId = cartDto.AccountId,
+                IsActive = cartDto.IsActive
+            };
+
             await _cartService.AddCartAsync(cart);
             return CreatedAtAction(nameof(GetCartById), new { id = cart.Id }, cart);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCart(long id, [FromBody] Cart cart)
+        public async Task<IActionResult> UpdateCart(long id, [FromBody] CartDTO cartDto)
         {
-            if (id != cart.Id) return BadRequest();
-            await _cartService.UpdateCartAsync(cart);
+            if (cartDto == null) return BadRequest("Invalid request.");
+
+            var existingCart = await _cartService.GetCartByIdAsync(id);
+            if (existingCart == null) return NotFound();
+
+            existingCart.AccountId = cartDto.AccountId;
+            existingCart.IsActive = cartDto.IsActive;
+
+            await _cartService.UpdateCartAsync(existingCart);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCart(long id)
         {
+            var existingCart = await _cartService.GetCartByIdAsync(id);
+            if (existingCart == null) return NotFound();
+
             await _cartService.DeleteCartAsync(id);
             return NoContent();
         }
     }
-
 }

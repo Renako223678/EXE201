@@ -107,8 +107,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "cart",
-        "Type": "EXE201.Models.Cart",
+        "Name": "cartDto",
+        "Type": "EXE201.Controllers.DTO.CartDTO",
         "IsRequired": true
       }
     ],
@@ -144,8 +144,8 @@
         "IsRequired": true
       },
       {
-        "Name": "cart",
-        "Type": "EXE201.Models.Cart",
+        "Name": "cartDto",
+        "Type": "EXE201.Controllers.DTO.CartDTO",
         "IsRequired": true
       }
     ],
