@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Models.Account, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.EXE201.DTOs.AccountDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -28,8 +28,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "account",
-        "Type": "EXE201.Models.Account",
+        "Name": "accountDto",
+        "Type": "EXE201.Controllers.DTO.EXE201.DTOs.AccountDTO",
         "IsRequired": true
       }
     ],
@@ -51,7 +51,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "EXE201.Models.Account",
+        "Type": "EXE201.Controllers.DTO.EXE201.DTOs.AccountDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -75,8 +75,8 @@
         "IsRequired": true
       },
       {
-        "Name": "account",
-        "Type": "EXE201.Models.Account",
+        "Name": "accountDto",
+        "Type": "EXE201.Controllers.DTO.EXE201.DTOs.AccountDTO",
         "IsRequired": true
       }
     ],
@@ -93,6 +93,22 @@
       {
         "Name": "id",
         "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EXE201.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "EXE201.Controllers.DTO.LoginDTO",
         "IsRequired": true
       }
     ],

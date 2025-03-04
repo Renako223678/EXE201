@@ -1,5 +1,6 @@
-﻿using EXE201.Models;
-using EXE201.Services;
+﻿using EXE201.Controllers.DTO.EXE201.DTOs;
+
+using EXE201.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,13 +19,13 @@ namespace EXE201.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
+        public async Task<ActionResult<IEnumerable<AccountDTO>>> GetAccounts()
         {
             return Ok(await _accountService.GetAllAccountsAsync());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccount(long id)
+        public async Task<ActionResult<AccountDTO>> GetAccount(long id)
         {
             var account = await _accountService.GetAccountByIdAsync(id);
             if (account == null)
@@ -33,25 +34,32 @@ namespace EXE201.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAccount(Account account)
+        public async Task<IActionResult> CreateAccount([FromBody] AccountDTO accountDto)
         {
-            await _accountService.AddAccountAsync(account);
-            return CreatedAtAction(nameof(GetAccount), new { id = account.Id }, account);
+            if (accountDto == null) return BadRequest("Invalid account data.");
+
+            await _accountService.AddAccountAsync(accountDto);
+            return CreatedAtAction(nameof(GetAccount), accountDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAccount(long id, Account account)
+        public async Task<IActionResult> UpdateAccount(long id, [FromBody] AccountDTO accountDto)
         {
-            if (id != account.Id)
-                return BadRequest();
+            if (accountDto == null) return BadRequest("Invalid account data.");
 
-            await _accountService.UpdateAccountAsync(account);
+            var existingAccount = await _accountService.GetAccountByIdAsync(id);
+            if (existingAccount == null) return NotFound();
+
+            await _accountService.UpdateAccountAsync(id, accountDto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(long id)
         {
+            var existingAccount = await _accountService.GetAccountByIdAsync(id);
+            if (existingAccount == null) return NotFound();
+
             await _accountService.DeleteAccountAsync(id);
             return NoContent();
         }
