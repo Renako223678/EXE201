@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using EXE201.DTO;
 using EXE201.Models;
 
-namespace EXE201.Repository.Interface
+namespace EXE201.Service.Interface
 {
-    public interface IBookingRepository
+    public interface IBookingService
     {
         Task<IEnumerable<BookingDTO>> GetAllBookings();
         Task<BookingDTO?> GetBookingById(long id);
