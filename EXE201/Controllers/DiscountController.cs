@@ -1,11 +1,15 @@
-﻿using EXE201.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EXE201.Controllers.DTO;
+using EXE201.DTO;
+using EXE201.Models;
 using EXE201.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EXE201.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/discounts")]
     public class DiscountController : ControllerBase
     {
         private readonly IDiscountService _discountService;
@@ -15,14 +19,6 @@ namespace EXE201.Controllers
             _discountService = discountService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(long id)
-        {
-            var discount = await _discountService.GetDiscountByIdAsync(id);
-            if (discount == null) return NotFound();
-            return Ok(discount);
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -30,25 +26,48 @@ namespace EXE201.Controllers
             return Ok(discounts);
         }
 
-        [HttpGet("code/{code}")]
-        public async Task<IActionResult> GetByCode(string code)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(long id)
         {
-            var discount = await _discountService.GetDiscountByCodeAsync(code);
-            if (discount == null) return NotFound();
+            var discount = await _discountService.GetDiscountByIdAsync(id);
+            if (discount == null) return NotFound("Discount not found.");
             return Ok(discount);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Discount discount)
+        public async Task<IActionResult> Create([FromBody] DiscountDTO discountDto)
         {
+            if (discountDto == null) return BadRequest("Invalid discount data.");
+
+            var discount = new Discount
+            {
+                Code = discountDto.Code,
+                Percentage = discountDto.Percentage,
+                ExpiryDate = discountDto.ExpiryDate,
+                IsActive = discountDto.IsActive
+            };
+
             await _discountService.AddDiscountAsync(discount);
-            return CreatedAtAction(nameof(GetById), new { id = discount.Id }, discount);
+            return CreatedAtAction(nameof(GetById), new { id = discount.Id }, discountDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(long id, Discount discount)
+        public async Task<IActionResult> Update(long id, [FromBody] DiscountDTO discountDto)
         {
-            if (id != discount.Id) return BadRequest();
+            if (discountDto == null || id != discountDto.Id) return BadRequest("Invalid discount data.");
+
+            var existingDiscount = await _discountService.GetDiscountByIdAsync(id);
+            if (existingDiscount == null) return NotFound("Discount not found.");
+
+            var discount = new Discount
+            {
+                Id = discountDto.Id,
+                Code = discountDto.Code,
+                Percentage = discountDto.Percentage,
+                ExpiryDate = discountDto.ExpiryDate,
+                IsActive = discountDto.IsActive
+            };
+
             await _discountService.UpdateDiscountAsync(discount);
             return NoContent();
         }
@@ -56,6 +75,9 @@ namespace EXE201.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
+            var existingDiscount = await _discountService.GetDiscountByIdAsync(id);
+            if (existingDiscount == null) return NotFound("Discount not found.");
+
             await _discountService.DeleteDiscountAsync(id);
             return NoContent();
         }

@@ -16,7 +16,7 @@ public class NotificationService : INotificationService
         return await _repository.GetAllAsync();
     }
 
-    public async Task<Notification> GetNotificationById(int id)
+    public async Task<Notification> GetNotificationById(long id)
     {
         return await _repository.GetByIdAsync(id);
     }
@@ -31,7 +31,7 @@ public class NotificationService : INotificationService
         await _repository.UpdateAsync(notification);
     }
 
-    public async Task DeleteNotification(int id)
+    public async Task DeleteNotification(long id)
     {
         await _repository.DeleteAsync(id);
     }

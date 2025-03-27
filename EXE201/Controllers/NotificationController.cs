@@ -1,53 +1,85 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using EXE201.Controllers.DTO;
+using EXE201.DTO;
 using EXE201.Models;
+using EXE201.Service.Interface;
+using Microsoft.AspNetCore.Mvc;
 
-[Route("api/[controller]")]
-[ApiController]
-public class NotificationController : ControllerBase
+namespace EXE201.Controllers
 {
-    private readonly INotificationService _notificationService;
-
-    public NotificationController(INotificationService notificationService)
+    [ApiController]
+    [Route("api/notifications")]
+    public class NotificationController : ControllerBase
     {
-        _notificationService = notificationService;
-    }
+        private readonly INotificationService _notificationService;
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Notification>>> GetAllNotifications()
-    {
-        var notifications = await _notificationService.GetAllNotifications();
-        return Ok(notifications);
-    }
+        public NotificationController(INotificationService notificationService)
+        {
+            _notificationService = notificationService;
+        }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Notification>> GetNotificationById(int id)
-    {
-        var notification = await _notificationService.GetNotificationById(id);
-        if (notification == null) return NotFound();
-        return Ok(notification);
-    }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var notifications = await _notificationService.GetAllNotifications();
+            return Ok(notifications);
+        }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateNotification([FromBody] Notification notification)
-    {
-        await _notificationService.AddNotification(notification);
-        return CreatedAtAction(nameof(GetNotificationById), new { id = notification.Id }, notification);
-    }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(long id)
+        {
+            var notification = await _notificationService.GetNotificationById(id);
+            if (notification == null) return NotFound("Notification not found.");
+            return Ok(notification);
+        }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateNotification(int id, [FromBody] Notification notification)
-    {
-        if (id != notification.Id) return BadRequest();
-        await _notificationService.UpdateNotification(notification);
-        return NoContent();
-    }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] NotificationDTO notificationDto)
+        {
+            if (notificationDto == null) return BadRequest("Invalid notification data.");
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteNotification(int id)
-    {
-        await _notificationService.DeleteNotification(id);
-        return NoContent();
+            var notification = new Notification
+            {
+                AccountId = notificationDto.AccountId,
+                Title = notificationDto.Title,
+                Description = notificationDto.Description,
+                IsActive = notificationDto.IsActive
+            };
+
+            await _notificationService.AddNotification(notification);
+            return CreatedAtAction(nameof(GetById), new { id = notification.Id }, notificationDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(long id, [FromBody] NotificationDTO notificationDto)
+        {
+            if (notificationDto == null || id != notificationDto.Id) return BadRequest("Invalid notification data.");
+
+            var existingNotification = await _notificationService.GetNotificationById(id);
+            if (existingNotification == null) return NotFound("Notification not found.");
+
+            var notification = new Notification
+            {
+                Id = notificationDto.Id,
+                AccountId = notificationDto.AccountId,
+                Title = notificationDto.Title,
+                Description = notificationDto.Description,
+                IsActive = notificationDto.IsActive
+            };
+
+            await _notificationService.UpdateNotification(notification);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var existingNotification = await _notificationService.GetNotificationById(id);
+            if (existingNotification == null) return NotFound("Notification not found.");
+
+            await _notificationService.DeleteNotification(id);
+            return NoContent();
+        }
     }
 }
