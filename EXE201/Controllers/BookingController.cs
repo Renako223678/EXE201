@@ -1,54 +1,90 @@
-﻿//using System.Collections.Generic;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Mvc;
-//using EXE201.Models;
-//using EXE201.Services;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EXE201.DTO;
 
-//[Route("api/[controller]")]
-//[ApiController]
-//public class BookingController : ControllerBase
-//{
-//    private readonly IBookingService _bookingService;
+using EXE201.Models;
+using EXE201.Service.Interface;
+using Microsoft.AspNetCore.Mvc;
 
-//    public BookingController(IBookingService bookingService)
-//    {
-//        _bookingService = bookingService;
-//    }
+namespace EXE201.Controllers
+{
+    [ApiController]
+    [Route("api/bookings")]
+    public class BookingController : ControllerBase
+    {
+        private readonly IBookingService _bookingService;
 
-//    [HttpGet]
-//    public async Task<ActionResult<IEnumerable<Booking>>> GetAllBookings()
-//    {
-//        var bookings = await _bookingService.GetAllBookings();
-//        return Ok(bookings);
-//    }
+        public BookingController(IBookingService bookingService)
+        {
+            _bookingService = bookingService;
+        }
 
-//    [HttpGet("{id}")]
-//    public async Task<ActionResult<Booking>> GetBookingById(long id)
-//    {
-//        var booking = await _bookingService.GetBookingById(id);
-//        if (booking == null) return NotFound();
-//        return Ok(booking);
-//    }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var bookings = await _bookingService.GetAllBookings();
+            return Ok(bookings);
+        }
 
-//    [HttpPost]
-//    public async Task<IActionResult> CreateBooking([FromBody] Booking booking)
-//    {
-//        await _bookingService.AddBooking(booking);
-//        return CreatedAtAction(nameof(GetBookingById), new { id = booking.Id }, booking);
-//    }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(long id)
+        {
+            var booking = await _bookingService.GetBookingById(id);
+            if (booking == null) return NotFound("Booking not found.");
+            return Ok(booking);
+        }
 
-//    [HttpPut("{id}")]
-//    public async Task<IActionResult> UpdateBooking(long id, [FromBody] Booking booking)
-//    {
-//        if (id != booking.Id) return BadRequest();
-//        await _bookingService.UpdateBooking(booking);
-//        return NoContent();
-//    }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] BookingDTO bookingDto)
+        {
+            if (bookingDto == null) return BadRequest("Invalid booking data.");
 
-//    [HttpDelete("{id}")]
-//    public async Task<IActionResult> DeleteBooking(long id)
-//    {
-//        await _bookingService.DeleteBooking(id);
-//        return NoContent();
-//    }
-//}
+            var booking = new Booking
+            {
+                AccountId = bookingDto.AccountId,
+                DiscountId = bookingDto.DiscountId,
+                Description = bookingDto.Description,
+                BookingDate = bookingDto.BookingDate,
+                TotalPrice = bookingDto.TotalPrice,
+                Status = bookingDto.Status,
+                IsActive = true // Defaulting IsActive to true when creating a booking
+            };
+
+            await _bookingService.AddBooking(booking);
+            return CreatedAtAction(nameof(GetById), new { id = booking.Id }, bookingDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(long id, [FromBody] BookingDTO bookingDto)
+        {
+            if (bookingDto == null || id != bookingDto.Id) return BadRequest("Invalid booking data.");
+
+            var existingBooking = await _bookingService.GetBookingById(id);
+            if (existingBooking == null) return NotFound("Booking not found.");
+
+            var booking = new Booking
+            {
+                Id = bookingDto.Id,
+                AccountId = bookingDto.AccountId,
+                DiscountId = bookingDto.DiscountId,
+                Description = bookingDto.Description,
+                BookingDate = bookingDto.BookingDate,
+                TotalPrice = bookingDto.TotalPrice,
+                Status = bookingDto.Status,
+                IsActive = true // Assuming it remains active when updating
+            };
+
+            await _bookingService.UpdateBooking(booking);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var existingBooking = await _bookingService.GetBookingById(id);
+            if (existingBooking == null) return NotFound("Booking not found.");
+            await _bookingService.DeleteBooking(id);
+            return NoContent();
+        }
+    }
+}
