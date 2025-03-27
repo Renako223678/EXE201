@@ -42,6 +42,7 @@ namespace EXE201.Controllers
 
             var review = new Review
             {
+                Id = reviewDto.Id,
                 AccountId = reviewDto.AccountId,
                 PackageId = reviewDto.PackageId,
                 Rating = reviewDto.Rating,

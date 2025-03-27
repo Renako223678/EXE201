@@ -39,7 +39,7 @@ namespace EXE201.Controllers
             if (destinationDto == null) return BadRequest("Invalid destination data.");
 
             var destination = new Destination
-            {
+            {   Id = destinationDto.Id,
                 Name = destinationDto.Name,
                 Description = destinationDto.Description,
                 Location = destinationDto.Location,

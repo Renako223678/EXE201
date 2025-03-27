@@ -41,6 +41,7 @@ namespace EXE201.Controllers
 
             var packageService = new PackageService
             {
+                Id = packageServiceDto.Id,
                 PackageId = packageServiceDto.PackageId,
                 ServiceId = packageServiceDto.ServiceId,
                 Price = packageServiceDto.Price,

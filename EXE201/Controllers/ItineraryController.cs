@@ -40,7 +40,7 @@ namespace EXE201.Controllers
             if (itineraryDto == null) return BadRequest("Invalid itinerary data.");
 
             var itinerary = new Itinerary
-            {
+            {   Id = itineraryDto.Id,
                 PackageId = itineraryDto.PackageId,
                 Date = itineraryDto.Date,
                 Description = itineraryDto.Description,

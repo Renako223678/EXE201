@@ -61,7 +61,7 @@ namespace EXE201.Controllers
         public async Task<ActionResult> Add(CartItemDTO cartItemDTO)
         {
             var cartItem = new CartItem
-            {
+            {   Id = cartItemDTO.Id,
                 PackageId = cartItemDTO.PackageId,
                 CartId = cartItemDTO.CartId,
                 IsActive = cartItemDTO.IsActive

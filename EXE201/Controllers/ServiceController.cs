@@ -65,6 +65,7 @@ namespace EXE201.Controllers
         {
             var service = new Models.Service
             {
+                Id = serviceDTO.Id,
                 Name = serviceDTO.Name,
                 Description = serviceDTO.Description,
                 Price = serviceDTO.Price,
