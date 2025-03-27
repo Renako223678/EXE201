@@ -17,7 +17,7 @@ public class NotificationRepository : INotificationRepository
         return await _context.Notifications.ToListAsync();
     }
 
-    public async Task<Notification> GetByIdAsync(int id)
+    public async Task<Notification> GetByIdAsync(long id)
     {
         return await _context.Notifications.FindAsync(id);
     }
@@ -34,7 +34,7 @@ public class NotificationRepository : INotificationRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(long id)
     {
         var notification = await _context.Notifications.FindAsync(id);
         if (notification != null)

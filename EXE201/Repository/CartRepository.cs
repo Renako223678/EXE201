@@ -26,6 +26,7 @@ namespace EXE201.Repository
 
         public async Task AddAsync(Cart cart)
         {
+            cart.Id = 0;
             await _context.Carts.AddAsync(cart);
             await _context.SaveChangesAsync();
         }

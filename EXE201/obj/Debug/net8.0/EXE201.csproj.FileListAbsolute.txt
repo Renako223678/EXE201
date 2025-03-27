@@ -506,3 +506,4 @@ D:\EXE201\EXE201\obj\Debug\net8.0\refint\EXE201.dll
 D:\EXE201\EXE201\obj\Debug\net8.0\EXE201.pdb
 D:\EXE201\EXE201\obj\Debug\net8.0\EXE201.genruntimeconfig.cache
 D:\EXE201\EXE201\obj\Debug\net8.0\ref\EXE201.dll
+C:\Users\karsa\Desktop\Github\EXE201\EXE201\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

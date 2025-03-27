@@ -1,11 +1,14 @@
-﻿using EXE201.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EXE201.Controllers.DTO;
+using EXE201.Models;
 using EXE201.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EXE201.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/destinations")]
     public class DestinationController : ControllerBase
     {
         private readonly IDestinationService _destinationService;
@@ -15,42 +18,67 @@ namespace EXE201.Controllers
             _destinationService = destinationService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDestinationById(long id)
-        {
-            var destination = await _destinationService.GetDestinationByIdAsync(id);
-            if (destination == null) return NotFound();
-            return Ok(destination);
-        }
-
         [HttpGet]
-        public async Task<IActionResult> GetAllDestinations()
+        public async Task<IActionResult> GetAll()
         {
             var destinations = await _destinationService.GetAllDestinationsAsync();
             return Ok(destinations);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateDestination([FromBody] Destination destination)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(long id)
         {
+            var destination = await _destinationService.GetDestinationByIdAsync(id);
+            if (destination == null) return NotFound("Destination not found.");
+            return Ok(destination);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] DestinationDTO destinationDto)
+        {
+            if (destinationDto == null) return BadRequest("Invalid destination data.");
+
+            var destination = new Destination
+            {
+                Name = destinationDto.Name,
+                Description = destinationDto.Description,
+                Location = destinationDto.Location,
+                IsActive = destinationDto.IsActive
+            };
+
             await _destinationService.AddDestinationAsync(destination);
-            return CreatedAtAction(nameof(GetDestinationById), new { id = destination.Id }, destination);
+            return CreatedAtAction(nameof(GetById), new { id = destination.Id }, destinationDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDestination(long id, [FromBody] Destination destination)
+        public async Task<IActionResult> Update(long id, [FromBody] DestinationDTO destinationDto)
         {
-            if (id != destination.Id) return BadRequest();
+            if (destinationDto == null || id != destinationDto.Id) return BadRequest("Invalid destination data.");
+
+            var existingDestination = await _destinationService.GetDestinationByIdAsync(id);
+            if (existingDestination == null) return NotFound("Destination not found.");
+
+            var destination = new Destination
+            {
+                Id = destinationDto.Id,
+                Name = destinationDto.Name,
+                Description = destinationDto.Description,
+                Location = destinationDto.Location,
+                IsActive = destinationDto.IsActive
+            };
+
             await _destinationService.UpdateDestinationAsync(destination);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDestination(long id)
+        public async Task<IActionResult> Delete(long id)
         {
+            var existingDestination = await _destinationService.GetDestinationByIdAsync(id);
+            if (existingDestination == null) return NotFound("Destination not found.");
+
             await _destinationService.DeleteDestinationAsync(id);
             return NoContent();
         }
     }
 }
-

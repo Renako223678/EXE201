@@ -5,8 +5,8 @@ using EXE201.Models;
 public interface INotificationService
 {
     Task<IEnumerable<Notification>> GetAllNotifications();
-    Task<Notification> GetNotificationById(int id);
+    Task<Notification> GetNotificationById(long id);
     Task AddNotification(Notification notification);
     Task UpdateNotification(Notification notification);
-    Task DeleteNotification(int id);
+    Task DeleteNotification(long id);
 }

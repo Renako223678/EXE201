@@ -4839,24 +4839,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\karsa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\EXE201\\EXE201\\EXE201.csproj",
+      "projectUniqueName": "C:\\Users\\karsa\\Desktop\\Github\\EXE201\\EXE201\\EXE201.csproj",
       "projectName": "EXE201",
-      "projectPath": "D:\\EXE201\\EXE201\\EXE201.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\EXE201\\EXE201\\obj\\",
+      "projectPath": "C:\\Users\\karsa\\Desktop\\Github\\EXE201\\EXE201\\EXE201.csproj",
+      "packagesPath": "C:\\Users\\karsa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\karsa\\Desktop\\Github\\EXE201\\EXE201\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\karsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
