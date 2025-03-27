@@ -40,7 +40,7 @@ namespace EXE201.Controllers
             if (discountDto == null) return BadRequest("Invalid discount data.");
 
             var discount = new Discount
-            {
+            {   Id  = discountDto.Id,
                 Code = discountDto.Code,
                 Percentage = discountDto.Percentage,
                 ExpiryDate = discountDto.ExpiryDate,

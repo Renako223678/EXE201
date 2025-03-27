@@ -41,6 +41,7 @@ namespace EXE201.Controllers
 
             var package = new Package
             {
+                Id = packageDto.Id,
                 AccountId = packageDto.AccountId,
                 DestinationId = packageDto.DestinationId,
                 Name = packageDto.Name,

@@ -59,7 +59,7 @@ namespace EXE201.Controllers
             if (bookingDetailDto == null) return BadRequest("Invalid booking detail data.");
 
             var bookingDetail = new BookingDetail
-            {
+             {  Id = bookingDetailDto.Id,
                 BookingId = bookingDetailDto.BookingId,
                 PackageId = bookingDetailDto.PackageId,
                 IsActive = bookingDetailDto.IsActive

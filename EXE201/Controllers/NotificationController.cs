@@ -40,7 +40,7 @@ namespace EXE201.Controllers
             if (notificationDto == null) return BadRequest("Invalid notification data.");
 
             var notification = new Notification
-            {
+            {   Id = notificationDto.Id,
                 AccountId = notificationDto.AccountId,
                 Title = notificationDto.Title,
                 Description = notificationDto.Description,

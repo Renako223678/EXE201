@@ -40,7 +40,7 @@ namespace EXE201.Controllers
             if (bookingDto == null) return BadRequest("Invalid booking data.");
 
             var booking = new Booking
-            {
+            {   Id = bookingDto.Id,
                 AccountId = bookingDto.AccountId,
                 DiscountId = bookingDto.DiscountId,
                 Description = bookingDto.Description,
