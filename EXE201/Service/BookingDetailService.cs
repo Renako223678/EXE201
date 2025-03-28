@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using EXE201.Models;
 using EXE201.Repositories;
 
-namespace EXE201.Services;
+namespace EXE201.Service;
 
 public class BookingDetailService : IBookingDetailService
 {

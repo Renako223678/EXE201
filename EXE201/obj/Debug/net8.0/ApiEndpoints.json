@@ -99,22 +99,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EXE201.Controllers.AuthController",
-    "Method": "Login",
-    "RelativePath": "api/auth/login",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "loginDto",
-        "Type": "EXE201.Controllers.DTO.LoginDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "EXE201.Controllers.BookingDetailController",
     "Method": "GetAll",
     "RelativePath": "api/booking-details",
@@ -1212,6 +1196,22 @@
       {
         "Name": "id",
         "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EXE201.Controllers.UserAccountController",
+    "Method": "Login",
+    "RelativePath": "Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "EXE201.Controllers.UserAccountController\u002BLoginRequest",
         "IsRequired": true
       }
     ],

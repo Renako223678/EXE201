@@ -5,7 +5,7 @@ using EXE201.Models;
 using EXE201.Repository.Interface;
 using EXE201.Service.Interface;
 
-namespace EXE201.Services
+namespace EXE201.Service
 {
     public class BookingService : IBookingService
     {

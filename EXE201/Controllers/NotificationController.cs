@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EXE201.Controllers.DTO;
+﻿
 using EXE201.Controllers.DTO.Notification;
-using EXE201.Controllers.DTO.Package;
-using EXE201.DTO;
 using EXE201.Models;
 using EXE201.Service;
 using EXE201.Service.Interface;
-using EXE201.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EXE201.Controllers

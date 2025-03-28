@@ -507,3 +507,10 @@ C:\Users\karsa\Desktop\Github\EXE201\EXE201\obj\Debug\net8.0\refint\EXE201.dll
 C:\Users\karsa\Desktop\Github\EXE201\EXE201\obj\Debug\net8.0\EXE201.pdb
 C:\Users\karsa\Desktop\Github\EXE201\EXE201\obj\Debug\net8.0\EXE201.genruntimeconfig.cache
 C:\Users\karsa\Desktop\Github\EXE201\EXE201\obj\Debug\net8.0\ref\EXE201.dll
+C:\Users\karsa\Desktop\Github\EXE201\EXE201\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\karsa\Desktop\Github\EXE201\EXE201\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\karsa\Desktop\Github\EXE201\EXE201\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\karsa\Desktop\Github\EXE201\EXE201\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\karsa\Desktop\Github\EXE201\EXE201\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\karsa\Desktop\Github\EXE201\EXE201\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\karsa\Desktop\Github\EXE201\EXE201\bin\Debug\net8.0\efpt.config.json
