@@ -11,5 +11,7 @@ namespace EXE201.Repository.Interface
         Task AddAsync(Models.Service service);
         Task UpdateAsync(Models.Service service);
         Task DeleteAsync(long id);
+
+        Task<Models.Service?> GetByNameAsync(string name);
     }
 }

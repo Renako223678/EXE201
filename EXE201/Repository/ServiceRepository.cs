@@ -24,6 +24,10 @@ namespace EXE201.Repository
         {
             return await _context.Services.ToListAsync();
         }
+        public async Task<Models.Service?> GetByNameAsync(string name)
+        {
+            return await _context.Services.FirstOrDefaultAsync(s => s.Name == name);
+        }
 
         public async Task AddAsync(Models.Service service)
         {

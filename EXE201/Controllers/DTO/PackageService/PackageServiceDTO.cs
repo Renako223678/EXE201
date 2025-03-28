@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EXE201.Controllers.DTO
+namespace EXE201.Controllers.DTO.PackageService
 {
     public class PackageServiceDTO
     {

@@ -1,14 +1,9 @@
-﻿using EXE201.Controllers.DTO;
-using EXE201.DTO;
-using EXE201.Models;
+﻿using EXE201.Controllers.DTO.Service;
 using EXE201.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EXE201.Controllers
 {
-    //Đã check api
     [Route("api/[controller]")]
     [ApiController]
     public class ServiceController : ControllerBase
@@ -20,30 +15,12 @@ namespace EXE201.Controllers
             _serviceService = serviceService;
         }
 
-        // Lấy Service theo ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceDTO>> GetById(long id)
-        {
-            var service = await _serviceService.GetByIdAsync(id);
-            if (service == null) return NotFound();
 
-            return Ok(new ServiceDTO
-            {
-                Id = service.Id,
-                Name = service.Name,
-                Description = service.Description,
-                Price = service.Price,
-                IsActive = service.IsActive
-            });
-        }
-
-        // Lấy tất cả Services
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ServiceDTO>>> GetAll()
         {
             var services = await _serviceService.GetAllAsync();
             var result = new List<ServiceDTO>();
-
             foreach (var service in services)
             {
                 result.Add(new ServiceDTO
@@ -55,14 +32,35 @@ namespace EXE201.Controllers
                     IsActive = service.IsActive
                 });
             }
-
             return Ok(result);
         }
 
-        // Thêm mới Service
-        [HttpPost]
-        public async Task<ActionResult> Add(ServiceDTO serviceDTO)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServiceDTO>> GetById(long id)
         {
+            var service = await _serviceService.GetByIdAsync(id);
+            if (service == null)
+                return NotFound(new { Message = $"Service with ID {id} was not found." });
+
+            return Ok(new ServiceDTO
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Description = service.Description,
+                Price = service.Price,
+                IsActive = service.IsActive
+            });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(ServiceDTO serviceDTO)
+        {
+            var existingService = await _serviceService.GetByNameAsync(serviceDTO.Name);
+            if (existingService != null)
+            {
+                return Conflict(new { Message = $"Service with name '{serviceDTO.Name}' already exists." });
+            }
+
             var service = new Models.Service
             {
                 Id = serviceDTO.Id,
@@ -73,34 +71,70 @@ namespace EXE201.Controllers
             };
 
             await _serviceService.AddAsync(service);
-            return CreatedAtAction(nameof(GetById), new { id = service.Id }, serviceDTO);
+
+            return CreatedAtAction(nameof(GetById), new { id = service.Id }, new
+            {
+                Message = "Service created successfully.",
+                Data = serviceDTO
+            });
         }
 
-        // Cập nhật Service
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(long id, ServiceDTO serviceDTO)
+        public async Task<ActionResult> Update(long id, ServiceDTOUpdate serviceDTOUpdate)
         {
-            var existingService = await _serviceService.GetByIdAsync(id);
-            if (existingService == null) return NotFound();
 
-            existingService.Name = serviceDTO.Name;
-            existingService.Description = serviceDTO.Description;
-            existingService.Price = serviceDTO.Price;
-            existingService.IsActive = serviceDTO.IsActive;
+            var existingService = await _serviceService.GetByIdAsync(id);
+            if (existingService == null)
+            {
+                return NotFound(new { Message = $"No Service found with ID {id}." });
+            }
+
+            var existingName = await _serviceService.GetByNameAsync(serviceDTOUpdate.Name);
+            if (existingName != null)
+            {
+                return Conflict(new { Message = $"Service with name '{serviceDTOUpdate.Name}' already exists." });
+            }
+
+            existingService.Name = serviceDTOUpdate.Name;
+            existingService.Description = serviceDTOUpdate.Description;
+            existingService.Price = serviceDTOUpdate.Price;
 
             await _serviceService.UpdateAsync(existingService);
-            return NoContent();
+
+            return Ok(new
+            {
+                Message = "Service updated successfully.",
+                Data = new
+                {
+                    Id = existingService.Id,
+                    Name = existingService.Name,
+                    Description = existingService.Description,
+                    Price = existingService.Price,
+                    IsActive = existingService.IsActive
+                }
+            });
         }
 
-        // Xóa Service
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
             var existingService = await _serviceService.GetByIdAsync(id);
-            if (existingService == null) return NotFound();
+            if (existingService == null)
 
+                return NotFound(new { Message = $"No Service found with ID {id}." });
             await _serviceService.DeleteAsync(id);
-            return NoContent();
+            return Ok(new
+            {
+                Message = $"Service with ID {id} has been deleted successfully.",
+                Data = new
+                {
+                    Id = existingService.Id,
+                    Name = existingService.Name,
+                    Description = existingService.Description,
+                    Price = existingService.Price,
+                    IsActive = existingService.IsActive
+                }
+            });
         }
     }
 }

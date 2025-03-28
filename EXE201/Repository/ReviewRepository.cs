@@ -21,8 +21,16 @@ namespace EXE201.Repository
         public async Task<IEnumerable<Review>> GetAllAsync()
         {
             return await _context.Reviews.ToListAsync();
+
         }
 
+        //public async Task<IEnumerable<Review>> GetAllAsync()
+        //{
+        //    return await _context.Reviews
+        //.Include(r => r.Account)
+        //.Include(r => r.Package)
+        //.ToListAsync();
+        //}
         public async Task AddAsync(Review review)
         {
             await _context.Reviews.AddAsync(review);
