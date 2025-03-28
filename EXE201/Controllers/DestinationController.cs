@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EXE201.Controllers.DTO;
+﻿using EXE201.Controllers.DTO.Destination;
 using EXE201.Models;
 using EXE201.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -19,66 +17,113 @@ namespace EXE201.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<DestinationDTO>>> GetAll()
         {
             var destinations = await _destinationService.GetAllDestinationsAsync();
-            return Ok(destinations);
+            var result = new List<DestinationDTO>();
+            foreach (var destination in destinations)
+            {
+                result.Add(new DestinationDTO
+                {
+                    Id = destination.Id,
+                    Name = destination.Name,
+                    Description = destination.Description,
+                    Location = destination.Location,
+                    IsActive = destination.IsActive,
+                });
+            }
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(long id)
+        public async Task<ActionResult<DestinationDTO>> GetById(long id)
         {
             var destination = await _destinationService.GetDestinationByIdAsync(id);
-            if (destination == null) return NotFound("Destination not found.");
-            return Ok(destination);
+            if (destination == null)
+                return NotFound(new { Message = $"Destination with ID {id} was not found." });
+
+            return Ok(new DestinationDTO
+            {
+                Id = destination.Id,
+                Name = destination.Name,
+                Description = destination.Description,
+                Location = destination.Location,
+                IsActive = destination.IsActive,
+            });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] DestinationDTO destinationDto)
+        public async Task<ActionResult> Create(DestinationDTO destinationDTO)
         {
-            if (destinationDto == null) return BadRequest("Invalid destination data.");
-
             var destination = new Destination
-            {   Id = destinationDto.Id,
-                Name = destinationDto.Name,
-                Description = destinationDto.Description,
-                Location = destinationDto.Location,
-                IsActive = destinationDto.IsActive
+            {
+                Id = destinationDTO.Id,
+                Name = destinationDTO.Name,
+                Description = destinationDTO.Description,
+                Location = destinationDTO.Location,
+                IsActive = destinationDTO.IsActive,
             };
 
             await _destinationService.AddDestinationAsync(destination);
-            return CreatedAtAction(nameof(GetById), new { id = destination.Id }, destinationDto);
+
+            return CreatedAtAction(nameof(GetById), new { id = destination.Id }, new
+            {
+                Message = "Destination created successfully.",
+                Data = destinationDTO
+            });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(long id, [FromBody] DestinationDTO destinationDto)
+        public async Task<ActionResult> Update(long id, DestinationDTOUpdate destinationDTOUpdate)
         {
-            if (destinationDto == null || id != destinationDto.Id) return BadRequest("Invalid destination data.");
-
             var existingDestination = await _destinationService.GetDestinationByIdAsync(id);
-            if (existingDestination == null) return NotFound("Destination not found.");
-
-            var destination = new Destination
+            if (existingDestination == null)
             {
-                Id = destinationDto.Id,
-                Name = destinationDto.Name,
-                Description = destinationDto.Description,
-                Location = destinationDto.Location,
-                IsActive = destinationDto.IsActive
-            };
+                return NotFound(new { Message = $"No Destination found with ID {id}." });
+            }
 
-            await _destinationService.UpdateDestinationAsync(destination);
-            return NoContent();
+            existingDestination.Name = destinationDTOUpdate.Name;
+            existingDestination.Description = destinationDTOUpdate.Description;
+            existingDestination.Location = destinationDTOUpdate.Location;
+
+            await _destinationService.UpdateDestinationAsync(existingDestination);
+
+            return Ok(new
+            {
+                Message = "Destination updated successfully.",
+                Data = new
+                {
+                    Id = existingDestination.Id,
+                    Name = existingDestination.Name,
+                    Description = existingDestination.Description,
+                    Location = existingDestination.Location,
+                    IsActive = existingDestination.IsActive,
+                }
+            });
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
             var existingDestination = await _destinationService.GetDestinationByIdAsync(id);
-            if (existingDestination == null) return NotFound("Destination not found.");
+            if (existingDestination == null)
+            {
+                return NotFound(new { Message = $"No Destination found with ID {id}." });
+            }
 
             await _destinationService.DeleteDestinationAsync(id);
-            return NoContent();
+            return Ok(new
+            {
+                Message = $"Destination with ID {id} has been deleted successfully.",
+                Data = new
+                {
+                    Id = existingDestination.Id,
+                    Name = existingDestination.Name,
+                    Description = existingDestination.Description,
+                    Location = existingDestination.Location,
+                    IsActive = existingDestination.IsActive,
+                }
+            });
         }
     }
 }

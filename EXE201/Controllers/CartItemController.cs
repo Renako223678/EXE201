@@ -1,10 +1,9 @@
-﻿using EXE201.Controllers.DTO;
-using EXE201.DTO;
+﻿
+using EXE201.Controllers.DTO.CartItem;
 using EXE201.Models;
 using EXE201.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
 
 namespace EXE201.Controllers
 {

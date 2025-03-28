@@ -330,7 +330,7 @@
     "Parameters": [
       {
         "Name": "cartItemDTO",
-        "Type": "EXE201.Controllers.DTO.CartItemDTO",
+        "Type": "EXE201.Controllers.DTO.CartItem.CartItemDTO",
         "IsRequired": true
       }
     ],
@@ -352,7 +352,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "EXE201.Controllers.DTO.CartItemDTO",
+        "Type": "EXE201.Controllers.DTO.CartItem.CartItemDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -377,7 +377,7 @@
       },
       {
         "Name": "cartItemDTO",
-        "Type": "EXE201.Controllers.DTO.CartItemDTO",
+        "Type": "EXE201.Controllers.DTO.CartItem.CartItemDTO",
         "IsRequired": true
       }
     ],
@@ -415,7 +415,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.CartItemDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.CartItem.CartItemDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -433,7 +433,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.Destination.DestinationDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.DestinationController",
@@ -444,8 +454,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "destinationDto",
-        "Type": "EXE201.Controllers.DTO.DestinationDTO",
+        "Name": "destinationDTO",
+        "Type": "EXE201.Controllers.DTO.Destination.DestinationDTO",
         "IsRequired": true
       }
     ],
@@ -465,7 +475,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "EXE201.Controllers.DTO.Destination.DestinationDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.DestinationController",
@@ -481,8 +501,8 @@
         "IsRequired": true
       },
       {
-        "Name": "destinationDto",
-        "Type": "EXE201.Controllers.DTO.DestinationDTO",
+        "Name": "destinationDTOUpdate",
+        "Type": "EXE201.Controllers.DTO.Destination.DestinationDTOUpdate",
         "IsRequired": true
       }
     ],
@@ -512,7 +532,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.Discount.DiscountDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.DiscountController",
@@ -523,8 +553,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "discountDto",
-        "Type": "EXE201.Controllers.DTO.DiscountDTO",
+        "Name": "discountDTO",
+        "Type": "EXE201.Controllers.DTO.Discount.DiscountDTO",
         "IsRequired": true
       }
     ],
@@ -544,7 +574,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "EXE201.Controllers.DTO.Discount.DiscountDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.DiscountController",
@@ -560,8 +600,8 @@
         "IsRequired": true
       },
       {
-        "Name": "discountDto",
-        "Type": "EXE201.Controllers.DTO.DiscountDTO",
+        "Name": "discountDTOUpdate",
+        "Type": "EXE201.Controllers.DTO.Discount.DiscountDTOUpdate",
         "IsRequired": true
       }
     ],
@@ -591,7 +631,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.Itinerary.ItineraryDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.ItineraryController",
@@ -602,8 +652,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "itineraryDto",
-        "Type": "EXE201.Controllers.DTO.ItineraryDTO",
+        "Name": "itineraryDTO",
+        "Type": "EXE201.Controllers.DTO.Itinerary.ItineraryDTO",
         "IsRequired": true
       }
     ],
@@ -623,7 +673,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "EXE201.Controllers.DTO.Itinerary.ItineraryDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.ItineraryController",
@@ -639,8 +699,8 @@
         "IsRequired": true
       },
       {
-        "Name": "itineraryDto",
-        "Type": "EXE201.Controllers.DTO.ItineraryDTO",
+        "Name": "itineraryDTOUpdate",
+        "Type": "EXE201.Controllers.DTO.Itinerary.ItineraryDTOUpdate",
         "IsRequired": true
       }
     ],
@@ -670,7 +730,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.Notification.NotificationDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.NotificationController",
@@ -681,8 +751,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "notificationDto",
-        "Type": "EXE201.Controllers.DTO.NotificationDTO",
+        "Name": "notificationDTO",
+        "Type": "EXE201.Controllers.DTO.Notification.NotificationDTO",
         "IsRequired": true
       }
     ],
@@ -702,7 +772,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "EXE201.Controllers.DTO.Notification.NotificationDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.NotificationController",
@@ -718,8 +798,8 @@
         "IsRequired": true
       },
       {
-        "Name": "notificationDto",
-        "Type": "EXE201.Controllers.DTO.NotificationDTO",
+        "Name": "notificationDTOUpdate",
+        "Type": "EXE201.Controllers.DTO.Notification.NotificationDTOUpdate",
         "IsRequired": true
       }
     ],
@@ -749,7 +829,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.Package.PackageDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.PackageController",
@@ -760,8 +850,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "packageDto",
-        "Type": "EXE201.Controllers.DTO.PackageDTO",
+        "Name": "packageDTO",
+        "Type": "EXE201.Controllers.DTO.Package.PackageDTO",
         "IsRequired": true
       }
     ],
@@ -781,7 +871,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "EXE201.Controllers.DTO.Package.PackageDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.PackageController",
@@ -797,8 +897,8 @@
         "IsRequired": true
       },
       {
-        "Name": "packageDto",
-        "Type": "EXE201.Controllers.DTO.PackageDTO",
+        "Name": "packageDTOUpdate",
+        "Type": "EXE201.Controllers.DTO.Package.PackageDTOUpdate",
         "IsRequired": true
       }
     ],
