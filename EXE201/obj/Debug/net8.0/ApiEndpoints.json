@@ -828,7 +828,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.PackageService.PackageServiceDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.PackageServiceController",
@@ -839,8 +849,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "packageServiceDto",
-        "Type": "EXE201.Controllers.DTO.PackageServiceDTO",
+        "Name": "packageServiceDTO",
+        "Type": "EXE201.Controllers.DTO.PackageService.PackageServiceDTO",
         "IsRequired": true
       }
     ],
@@ -860,7 +870,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "EXE201.Controllers.DTO.PackageService.PackageServiceDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.PackageServiceController",
@@ -876,8 +896,8 @@
         "IsRequired": true
       },
       {
-        "Name": "packageServiceDto",
-        "Type": "EXE201.Controllers.DTO.PackageServiceDTO",
+        "Name": "packageServiceDTOUpdate",
+        "Type": "EXE201.Controllers.DTO.PackageService.PackageServiceDTOUpdate",
         "IsRequired": true
       }
     ],
@@ -907,7 +927,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.Review.ReviewDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.ReviewController",
@@ -918,8 +948,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "reviewDto",
-        "Type": "EXE201.Controllers.DTO.ReviewDTO",
+        "Name": "reviewDTO",
+        "Type": "EXE201.Controllers.DTO.Review.ReviewDTO",
         "IsRequired": true
       }
     ],
@@ -939,7 +969,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "EXE201.Controllers.DTO.Review.ReviewDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EXE201.Controllers.ReviewController",
@@ -955,8 +995,8 @@
         "IsRequired": true
       },
       {
-        "Name": "reviewDto",
-        "Type": "EXE201.Controllers.DTO.ReviewDTO",
+        "Name": "reviewDTOUpdate",
+        "Type": "EXE201.Controllers.DTO.Review.ReviewDTOUpdate",
         "IsRequired": true
       }
     ],
@@ -988,7 +1028,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.ServiceDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EXE201.Controllers.DTO.Service.ServiceDTO, EXE201, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1000,7 +1040,7 @@
   },
   {
     "ContainingType": "EXE201.Controllers.ServiceController",
-    "Method": "Add",
+    "Method": "Create",
     "RelativePath": "api/Service",
     "HttpMethod": "POST",
     "IsController": true,
@@ -1008,7 +1048,7 @@
     "Parameters": [
       {
         "Name": "serviceDTO",
-        "Type": "EXE201.Controllers.DTO.ServiceDTO",
+        "Type": "EXE201.Controllers.DTO.Service.ServiceDTO",
         "IsRequired": true
       }
     ],
@@ -1030,7 +1070,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "EXE201.Controllers.DTO.ServiceDTO",
+        "Type": "EXE201.Controllers.DTO.Service.ServiceDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1054,8 +1094,8 @@
         "IsRequired": true
       },
       {
-        "Name": "serviceDTO",
-        "Type": "EXE201.Controllers.DTO.ServiceDTO",
+        "Name": "serviceDTOUpdate",
+        "Type": "EXE201.Controllers.DTO.Service.ServiceDTOUpdate",
         "IsRequired": true
       }
     ],
