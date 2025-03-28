@@ -1,6 +1,4 @@
 ﻿using EXE201.Controllers.DTO.EXE201.DTOs;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace EXE201.Service.Interface
 {

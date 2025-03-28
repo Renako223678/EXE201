@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using EXE201.Models;
 
-namespace EXE201.Services;
+namespace EXE201.Service;
 
 public interface IBookingDetailService
 {

@@ -1,12 +1,9 @@
-﻿
-using EXE201.Models;
+﻿using EXE201.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using EXE201.Service.Interface;
 using EXE201.Controllers.DTO.EXE201.DTOs;
 
-namespace EXE201.Services
+namespace EXE201.Service
 {
     public class AccountService : IAccountService
     {
